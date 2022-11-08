@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+   <h1>Welcome {{ user.username }}!</h1>
+    <br>
+    <table border="1">
+        {% for x,y in codeIDs %}
+        <tr>
+        <td><a href="{% url 'snippetTemplate' x %}">Snippet</a></td>
+        <td>{{ x }}</td>
+        <td>{{ y }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+
+
+
+   <a href="{% url 'new' %}">New Snippet</a>
+   <a href="{% url 'logout' %}">Logout?</a>
+</body>
+</html>
