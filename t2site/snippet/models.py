@@ -15,4 +15,5 @@ class Snippet(models.Model):
     
     #Actual Data 
     code = models.CharField(max_length=1024)
+    title = models.CharField(max_length=36)
     lang = models.ForeignKey(ProgLang, on_delete=models.CASCADE)    

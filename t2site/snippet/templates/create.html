@@ -11,10 +11,17 @@
     <h1>Crie um novo Snippet</h1>
     <form method="post">
       {% csrf_token %}
-        <!-- Message input -->
+<!-- Code input -->
+        <div class="form-outline mb-4">
+          <textarea name = "snippetTitle" class="form-control" id="form4Example3" rows="4"></textarea>
+          <label class="form-label" for="form4Example3">title</label>
+        </div>
+
+
+        <!-- Code input -->
         <div class="form-outline mb-4">
           <textarea name = "snippet" class="form-control" id="form4Example3" rows="4"></textarea>
-          <label class="form-label" for="form4Example3">Message</label>
+          <label class="form-label" for="form4Example3">code</label>
         </div>
 
         <!-- Programming Language -->

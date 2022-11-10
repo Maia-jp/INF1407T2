@@ -16,11 +16,11 @@ from snippet.models import Snippet
 def home(request):
     if request.user.is_authenticated:
         userModel = User.objects.get(username=request.user.username)
-        snippetsObj = Snippet.objects.filter(author=userModel).values_list('id','updated_at') 
+        snippetsObj = Snippet.objects.filter(author=userModel).values_list('id','title','updated_at') 
         userCodeIds = []
         print(snippetsObj)
-        for id,dt in snippetsObj:
-            userCodeIds.append([str(id),dt.strftime("%m/%d/%Y, %H:%M:%S")])
+        for id,title,dt in snippetsObj:
+            userCodeIds.append([str(id),title,dt.strftime("%m/%d/%Y, %H:%M:%S")])
         context = {
             'codeIDs': userCodeIds
         }

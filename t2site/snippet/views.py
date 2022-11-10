@@ -25,10 +25,11 @@ def new(request):
 
         if request.method == "POST":
             user = User.objects.get(username=request.user.username)
+            title = request.POST['snippetTitle']
             code = request.POST['snippet']
             lang = ProgLang.objects.get(name=request.POST['lang'])
-            print([user,code,lang])
-            newSnippet = Snippet(author=user,code=code,lang=lang)
+            print([user,code,lang,title])
+            newSnippet = Snippet(author=user,code=code,lang=lang,title=title)
             newSnippet.save()
             return HttpResponseRedirect("/snippet/{}".format(newSnippet.id))
 
