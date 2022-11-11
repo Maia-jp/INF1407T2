@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Snippet to show</title>
+
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.6.0/styles/github-dark.min.css"
+    />
+    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.6.0/highlight.min.js"></script>
+    {% load static %}
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="{% static 'css/snippet.css' %}" />
+  </head>
+    <!-- NAVBAR -->
+    <nav class="navbar" style="background-color: #000000;" >
+      <a class="navbar-brand text-white" href="{% url 'home' %}">
+        <img
+          src="{% static 'assets/logo1.svg' %}"
+          width="30"
+          height="30"
+          class="d-inline-block align-top"
+          alt=""
+        />
+        CodeShare
+      </a>
+    </nav>
+  <body>
+    <main class="view">
+      <div class="window">
+        <div class="window-header"> 
+          <div class="action-buttons"></div>
+          <div class="controls">
+            {{ title }} - created at {{ date }} by {{ author }}
+          </div>
+        </div>
+          <pre><code class="editor">{{ code }}</code></pre>
+      </div>
+    </main>
+  </body>
+  <script>hljs.highlightAll();</script>
+</html>

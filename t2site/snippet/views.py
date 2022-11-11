@@ -42,7 +42,17 @@ def new(request):
         return redirect("login")
 
 
+
 def snippetTemplate(request, id):
     id = uuid.UUID(id)
-    code = Snippet.objects.get(id=id)
-    return HttpResponse(code.code)
+    obj = Snippet.objects.get(id=id)
+
+    context = {
+        "code" : obj.code,
+        "author" : obj.author.username,
+        "title" : obj.title,
+        "date" : obj.updated_at.strftime("%m/%d/%Y, %H:%M:%S"),
+    }
+
+    template = loader.get_template('snippet.html')
+    return HttpResponse(template.render(context,request))

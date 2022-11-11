@@ -1,5 +1,89 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Logout</title>
+    {% load static %}
+    <!-- Bootstrap -->
+    <link
+      rel="stylesheet"
+      href="{% static 'bootstrap/css/bootstrap.min.css' %}"
+    />
+    <script src="{% static 'bootstrap/js/bootstrap.min.js' %}"></script>
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="{% static 'css/login.css' %}" />
+  </head>
+  <!-- NAVBAR -->
+  <nav class="navbar" style="background-color: #000000;" >
+    <a class="navbar-brand text-white" href="{% url 'home' %}">
+      <img
+        src="{% static 'assets/logo1.svg' %}"
+        width="30"
+        height="30"
+        class="d-inline-block align-top"
+        alt=""
+      />
+      CodeShare
+    </a>
+  </nav>
+  <body class="vh-100 gradient-custom">
+    <section class="vh-100 gradient-custom">
+      <div class="container py-5 h-100">
+        <div class="row d-flex justify-content-center align-items-center h-100">
+          <div class="col-12 col-md-8 col-lg-6 col-xl-5">
+            <div class="card text-white" style="background-color:#000000;border-radius: 1rem">
+              <div class="card-body p-5 text-center">
+                <div class="mb-md-5 mt-md-4 pb-5">
+                  <h2 class="fw-bold mb-2 text-uppercase">Logout</h2>
+                  <p class="text-white-50 mb-5">
+                    Bye Bye
+                  </p>
+                  <a href="{% url 'login' %}">Login</a> <br>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </body>
+</html>
+
+<!-- <h3>login</h3>
+
+<form action="" method="POST">
+    {% csrf_token %}
+    {% for field in form %}
+        <p>{{ field.label }}: <br> {{ field }}</p>
+    {% endfor %}
+    <button type="submit">Login</button>
+</form>
+
+<p>Don't have an account? <a href="{% url 'register' %}">Signup here</a></p> -->
+
+<!-- <div class="form-outline form-white mb-4">
+    <input
+      type="email"
+      id="typeEmailX"
+      class="form-control form-control-lg"
+    />
+    <label class="form-label" for="typeEmailX">Email</label>
+  </div>
+
+  <div class="form-outline form-white mb-4">
+    <input
+      type="password"
+      id="typePasswordX"
+      class="form-control form-control-lg"
+    />
+    <label class="form-label" for="typePasswordX">Password</label>
+  </div> -->
+
+
+
+<!-- <!DOCTYPE html>
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -14,8 +98,8 @@
     </div>
 
     <h3>Login again?</h3>
-    <a href="{% url 'login' %}">---> Login</a> <br>
-    <a href="{% url 'home' %}"><--- Or go back to home.</a>
+    <a href="{% url 'login' %}">Login</a> <br>
+    <a href="{% url 'home' %}">Or go back to home.</a>
 {% endblock content %}
 </body>
-</html>
+</html> -->
