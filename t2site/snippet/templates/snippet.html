@@ -1,56 +1,47 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>{{ title }} by {{ author }}</title>
-    {% load static %}
-    <!-- Bootstrap -->
-    <link
-      rel="stylesheet"
-      href="{% static 'bootstrap/css/bootstrap.min.css' %}"
-    />
-    <!-- Highlight JS -->
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.6.0/styles/github-dark.min.css"
-    />
-    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.6.0/highlight.min.js"></script>
-    <!-- Custom CSS -->
-    <link rel="stylesheet" href="{% static 'css/snippet.css' %}" />
-  </head>
-    <!-- NAVBAR -->
-    <nav class="navbar" style="background-color: #000000;" >
-      <a class="navbar-brand text-white" href="{% url 'home' %}">
-        <img
-          src="{% static 'assets/logo1.svg' %}"
-          width="30"
-          height="30"
-          class="d-inline-block align-top"
-          alt=""
-        />
-        CodeShare
-      </a>
-    </nav>
-  <body>
-    <main class="view">
-      <div class="window">
-        <div class="window-header"> 
-          <div class="action-buttons"></div>
-          <div class="controls">
-            {{ title }} - ultima alteração em {{ date }} by {{ author }}
-          </div>
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>{{ title }} by {{ author }}</title>
+  {% load static %}
+  <!-- Bootstrap -->
+  <link rel="stylesheet" href="{% static 'bootstrap/css/bootstrap.min.css' %}" />
+  <!-- Highlight JS -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.6.0/styles/github-dark.min.css" />
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.6.0/highlight.min.js"></script>
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="{% static 'css/snippet.css' %}" />
+</head>
+<!-- NAVBAR -->
+<nav class="navbar" style="background-color: #000000;">
+  <a class="navbar-brand text-white" href="{% url 'home' %}">
+    <img src="{% static 'assets/logo1.svg' %}" width="30" height="30" class="d-inline-block align-top" alt="" />
+    CodeShare
+  </a>
+</nav>
+
+<body>
+  <main class="view">
+    <div class="window">
+      <div class="window-header">
+        <div class="action-buttons"></div>
+        <div class="controls">
+          {{ title }} - ultima alteração em {{ date }} by {{ author }}
         </div>
-          <pre><code class="editor">{{ code }}</code></pre>
       </div>
-      {% if edit %}
-      <button id="btnEditar" class="btn" type="submit" onclick="goToEdit()" >Editar</button>
-      {% endif %}
-      
-    </main>
-  </body>
-  <!-- Custom JS -->
+      <pre><code class="editor">{{ code }}</code></pre>
+    </div>
+    {% if edit %}
+    <button id="btnEditar" class="btn" type="submit" onclick="goToEdit()">Editar</button>
+    {% endif %}
+
+  </main>
+</body>
+<!-- Custom JS -->
 <script src="{% static 'js/snippet.js' %}"></script>
-  <script>hljs.highlightAll();</script>
+<script>hljs.highlightAll();</script>
+
 </html>

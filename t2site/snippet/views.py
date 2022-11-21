@@ -10,10 +10,11 @@ from django.shortcuts import render
 from django.http import HttpResponse
 from django.template import loader
 
-#Models
+# Models
 from django.contrib.auth.models import User
 from snippet.models import ProgLang
 from snippet.models import Snippet
+
 
 def index(request):
     template = loader.get_template('test.html')
@@ -28,18 +29,19 @@ def new(request):
             title = request.POST['snippetTitle']
             code = request.POST['snippet']
             lang = ProgLang.objects.get(name=request.POST['lang'])
-            print([user,code,lang,title])
-            newSnippet = Snippet(author=user,code=code,lang=lang,title=title)
+            print([user, code, lang, title])
+            newSnippet = Snippet(author=user, code=code,
+                                 lang=lang, title=title)
             newSnippet.save()
             return HttpResponse("{}".format(newSnippet.id))
             # return HttpResponseRedirect("/snippet/{}".format(newSnippet.id))
 
-        programmingLangs  = ProgLang.objects.all().values()
-        context = {'progLang':programmingLangs}
+        programmingLangs = ProgLang.objects.all().values()
+        context = {'progLang': programmingLangs}
 
         template = loader.get_template('create.html')
-        return HttpResponse(template.render(context,request))
-    else:    
+        return HttpResponse(template.render(context, request))
+    else:
         return redirect("login")
 
 
@@ -48,18 +50,18 @@ def snippetTemplate(request, id):
     obj = Snippet.objects.get(id=id)
 
     context = {
-        "code" : obj.code,
-        "author" : obj.author.username,
-        "title" : obj.title,
-        "date" : obj.updated_at.strftime("%m/%d/%Y, %H:%M:%S"),
+        "code": obj.code,
+        "author": obj.author.username,
+        "title": obj.title,
+        "date": obj.updated_at.strftime("%m/%d/%Y, %H:%M:%S"),
         "edit": request.user.username == obj.author.username
     }
 
     template = loader.get_template('snippet.html')
-    return HttpResponse(template.render(context,request))
+    return HttpResponse(template.render(context, request))
 
 
-def snippetEdit(request,id):
+def snippetEdit(request, id):
     id = uuid.UUID(id)
     codeSnippet = Snippet.objects.get(id=id)
 
@@ -70,31 +72,31 @@ def snippetEdit(request,id):
         if request.method == "POST":
             return snippetEditPost(request)
         else:
-            respose = snippetEditLoadPage(request,id,codeSnippet)
+            respose = snippetEditLoadPage(request, id, codeSnippet)
             return respose
-    else:    
+    else:
         return redirect("login")
 
 
-
-def snippetEditLoadPage(request,id,codeSnippet):
+def snippetEditLoadPage(request, id, codeSnippet):
     context = {
-        "id" : id,
-        "code" : codeSnippet.code,
-        "author" : codeSnippet.author.username,
-        "title" : codeSnippet.title,
-        "date" : codeSnippet.updated_at.strftime("%m/%d/%Y, %H:%M:%S"),
+        "id": id,
+        "code": codeSnippet.code,
+        "author": codeSnippet.author.username,
+        "title": codeSnippet.title,
+        "date": codeSnippet.updated_at.strftime("%m/%d/%Y, %H:%M:%S"),
         "lang": codeSnippet.lang_id
     }
 
     template = loader.get_template('edit.html')
-    return HttpResponse(template.render(context,request))
+    return HttpResponse(template.render(context, request))
+
 
 def snippetEditPost(request):
     id_inPost = request.POST['id']
     code = request.POST['snippet']
-    
+
     id = uuid.UUID(id_inPost)
-    Snippet.objects.filter(id = id).update(code = code)
-    
+    Snippet.objects.filter(id=id).update(code=code)
+
     return HttpResponse(id_inPost)

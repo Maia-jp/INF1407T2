@@ -12,7 +12,7 @@
   <!-- Bootstrap -->
   <link rel="stylesheet" href="{% static 'bootstrap/css/bootstrap.min.css' %}" />
   <script src="{% static 'bootstrap/js/bootstrap.min.js' %}"></script>
-  
+
   <!-- Highlight JS -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.6.0/styles/github-dark.min.css" />
   <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.6.0/highlight.min.js"></script>
@@ -35,7 +35,7 @@
         <div class="action-buttons"></div>
         <div class="controls">
           <input id="codeTitle" type="text" placeholder="NovoCodigo">
-          
+
           <select id="codeLang" onchange="changeLang()">
             {% for x in progLang %}
             <option value="{{ x.name }}">{{ x.name }}</option>
