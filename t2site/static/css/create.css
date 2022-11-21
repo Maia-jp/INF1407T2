@@ -1,0 +1,14 @@
+@import url("https://fonts.googleapis.com/css2?family=Lato:wght@300&family=PT+Mono&display=swap");
+@import url("https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.1/styles/dracula.min.css");
+
+
+#codeTitle{
+    font-family: Lato, sans-serif;
+    height: 20px;
+    margin-right: 20px;
+}
+
+#codeLang{
+    font-family: Lato, sans-serif;
+    height: 20px;
+}

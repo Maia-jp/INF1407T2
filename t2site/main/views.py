@@ -12,25 +12,22 @@ from django.template import loader
 from django.contrib.auth.models import User
 from snippet.models import Snippet
 
+#Aux
+import json
+import uuid
+
+
 #Home Page
 def home(request):
+    #User authenticated -> show user mainpage
     if request.user.is_authenticated:
-        userModel = User.objects.get(username=request.user.username)
-        snippetsObj = Snippet.objects.filter(author=userModel).values_list('id','title','updated_at') 
-        userCodeIds = []
-        print(snippetsObj)
-        for id,title,dt in snippetsObj:
-            userCodeIds.append([str(id),title,dt.strftime("%m/%d/%Y, %H:%M:%S")])
-        context = {
-            'codeIDs': userCodeIds
-        }
-        
-        template = loader.get_template('home.html')
-        return HttpResponse(template.render(context,request))
+        #User Authentication respose
+        respose = userAuthPage(request)
+        return respose
     else:    
         return redirect("login")
 
-
+# Register page 
 def register(request):
     if request.method == 'POST':
         form = NewUserForm(request.POST)
@@ -44,3 +41,44 @@ def register(request):
 
     context = {'form': form}
     return render(request, 'register.html', context)
+
+
+
+
+#
+# User Functions
+#
+from django.http import QueryDict
+def userAuthPage(request):
+    #Any request
+    userModel = User.objects.get(username=request.user.username)
+    snippetsObj = Snippet.objects.filter(author=userModel).values_list('id','title','updated_at') 
+    userCodeIds = []
+    print(snippetsObj)
+    for id,title,dt in snippetsObj:
+        userCodeIds.append([str(id),title,dt.strftime("%m/%d/%Y, %H:%M:%S")])
+    context = {
+        'codeIDs': userCodeIds
+    }
+
+    #ajax requests
+    is_ajax = request.headers.get('X-Requested-With') == 'XMLHttpRequest'
+
+    #DELETE
+    if request.method == 'DELETE':
+        if is_ajax:
+            # Delete codeID
+            qd = QueryDict(request.body)
+            codeID = uuid.UUID(qd["codeID"])
+            snippet = Snippet.objects.get(id=codeID)
+            snippet.delete()
+        
+            #Respose
+            response_data = {}
+            response_data['status'] = 'ok'
+            return HttpResponse(json.dumps(response_data))
+
+    
+    
+    template = loader.get_template('home.html')
+    return HttpResponse(template.render(context,request))

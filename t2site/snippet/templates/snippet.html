@@ -4,14 +4,19 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Snippet to show</title>
-
+    <title>{{ title }} by {{ author }}</title>
+    {% load static %}
+    <!-- Bootstrap -->
+    <link
+      rel="stylesheet"
+      href="{% static 'bootstrap/css/bootstrap.min.css' %}"
+    />
+    <!-- Highlight JS -->
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.6.0/styles/github-dark.min.css"
     />
     <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.6.0/highlight.min.js"></script>
-    {% load static %}
     <!-- Custom CSS -->
     <link rel="stylesheet" href="{% static 'css/snippet.css' %}" />
   </head>
@@ -39,6 +44,10 @@
         </div>
           <pre><code class="editor">{{ code }}</code></pre>
       </div>
+      {% if edit %}
+      <button id="btnEditar" class="btn" type="submit">Editar</button>
+      {% endif %}
+      
     </main>
   </body>
   <script>hljs.highlightAll();</script>

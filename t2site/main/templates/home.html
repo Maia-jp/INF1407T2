@@ -1,91 +1,73 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>CodeShare</title>
-    {% load static %}
-    <!-- Bootstrap -->
-    <link
-      rel="stylesheet"
-      href="{% static 'bootstrap/css/bootstrap.min.css' %}"
-    />
-    <script src="{% static 'bootstrap/js/bootstrap.min.js' %}"></script>
-    <!-- Custom CSS -->
-    <link rel="stylesheet" href="{% static 'css/login.css' %}" />
-    <link rel="stylesheet" href="{% static 'css/main.css' %}" />
-  </head>
-    <!-- NAVBAR -->
-    <nav class="navbar" style="background-color: #000000;" >
-      <a class="navbar-brand text-white" href="{% url 'home' %}">
-        <img
-          src="{% static 'assets/logo1.svg' %}"
-          width="30"
-          height="30"
-          class="d-inline-block align-top"
-          alt=""
-        />
-        CodeShare
-      </a>
-    </nav>
-  <body class="vh-100 gradient-custom">
-    <div class="row d-flex justify-content-center align-items-center h-100 py-5">
-        <div class="col-12 col-md-11 col-lg-9 col-xl-11">
-          <div class="card text-white" style="background-color:#000000; border-radius: 1rem" >
-            <div class="card-body p-5 text-center">
-                <h1>Ola {{ user.username }}!</h1>
-                <p class="text-white-50">
-                    Nao é voce? Deseja
-                    <a href="{% url 'logout' %}"> Sair?</a>
-                  </p>
-            </div>
-            <!--  Cards -->
-            <div class="row d-flex justify-content-center p-5">
-                <!--  Card -->
-                {% for id,title,date in codeIDs %}
-                <div class="card col-md-3">
-                    <div class="card-body">
-                      <h3 class="card-title">{{ title }}</h3>
-                      <p class="card-text">Python<br>Ultima alteração: {{ date }}</p>
-                      <a  href="{% url 'snippetTemplate' id %}">
-                        <button type="button" class="btn btn-primary">View</button>
-                     </a>
-                      <button type="button" class="btn btn-danger">Delete</button>
-                    </div>
-                </div>
-                {% endfor %}
 
-                <a  href="{% url 'new' %}">
-                <div class="card col-md-3">
-                    <div class="card-body">
-                      <a  href="{% url 'new' %}">
-                        <h3 class="card-title">Adicionar Codigo</h3>
-                     </a>
-                    </div>
-                </div>
-            </a>
-                
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CodeShare</title>
+  {% load static %}
+  <!-- JQuery -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  <!-- Bootstrap -->
+  <link rel="stylesheet" href="{% static 'bootstrap/css/bootstrap.min.css' %}" />
+  <script src="{% static 'bootstrap/js/bootstrap.min.js' %}"></script>
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="{% static 'css/login.css' %}" />
+  <link rel="stylesheet" href="{% static 'css/main.css' %}" />
+</head>
+<!-- NAVBAR -->
+<nav class="navbar" style="background-color: #000000;">
+  <a class="navbar-brand text-white" href="{% url 'home' %}">
+    <img src="{% static 'assets/logo1.svg' %}" width="30" height="30" class="d-inline-block align-top" alt="" />
+    CodeShare
+  </a>
+</nav>
+
+<body class="vh-100 gradient-custom">
+  <div class="row d-flex justify-content-center align-items-center h-100 py-5">
+    <div class="col-12 col-md-11 col-lg-9 col-xl-11">
+      <div class="card text-white" style="background-color:#000000; border-radius: 1rem">
+        <div class="card-body p-5 text-center">
+          <h1>Ola {{ user.username }}!</h1>
+          <p class="text-white-50">
+            Nao é voce? Deseja
+            <a href="{% url 'logout' %}"> Sair?</a>
+          </p>
+        </div>
+        <!--  Cards -->
+        <div class="row d-flex justify-content-center p-5">
+          <!--  Card -->
+          {% for id,title,date in codeIDs %}
+          <div class="card col-md-3" id="{{ id }}">
+            <div class="card-body">
+              <h3 class="card-title">{{ title }}</h3>
+              <p class="card-text">Python<br>Ultima alteração: {{ date }}</p>
+              <a href="{% url 'snippetTemplate' id %}">
+                <button type="button" class="btn btn-primary">View</button>
+              </a>
+              <button type="button" class="btn btn-danger" id="deleteBtn"
+                onclick="deleteCard('{{ id }}')">Delete</button>
             </div>
+          </div>
+          {% endfor %}
+
+          <a href="{% url 'new' %}">
+            <div class="card col-md-3">
+              <div class="card-body">
+                <a href="{% url 'new' %}">
+                  <h3 class="card-title">Adicionar Codigo</h3>
+                </a>
+              </div>
+            </div>
+          </a>
 
         </div>
-    </div>
-  </body>
-  
-  <!-- <body>
-    <h1>Welcome {{ user.username }}!</h1>
-    <br />
-    <table border="1">
-      {% for x,z,y in codeIDs %}
-      <tr>
-        <td><a href="{% url 'snippetTemplate' x %}">Snippet</a></td>
-        <td>{{ z }}</td>
-        <td>{{ y }}</td>
-      </tr>
-      {% endfor %}
-    </table>
 
-    <a href="{% url 'new' %}">New Snippet</a>
-    <a href="{% url 'logout' %}">Logout?</a>
-  </body> -->
+      </div>
+    </div>
+</body>
+<!-- Custom JS -->
+<script src="{% static 'js/home.js' %}"></script>
+
 </html>

@@ -31,7 +31,8 @@ def new(request):
             print([user,code,lang,title])
             newSnippet = Snippet(author=user,code=code,lang=lang,title=title)
             newSnippet.save()
-            return HttpResponseRedirect("/snippet/{}".format(newSnippet.id))
+            return HttpResponse("{}".format(newSnippet.id))
+            # return HttpResponseRedirect("/snippet/{}".format(newSnippet.id))
 
         programmingLangs  = ProgLang.objects.all().values()
         context = {'progLang':programmingLangs}
@@ -52,6 +53,7 @@ def snippetTemplate(request, id):
         "author" : obj.author.username,
         "title" : obj.title,
         "date" : obj.updated_at.strftime("%m/%d/%Y, %H:%M:%S"),
+        "edit": request.user.username == obj.author.username
     }
 
     template = loader.get_template('snippet.html')

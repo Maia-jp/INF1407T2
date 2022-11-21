@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CodeShare</title>
+    {% load static %}
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="{% static 'bootstrap/css/bootstrap.min.css' %}" />
+    <script src="{% static 'bootstrap/js/bootstrap.min.js' %}"></script>
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="{% static 'css/login.css' %}" />
+    <link rel="stylesheet" href="{% static 'css/main.css' %}" />
+</head>
+<!-- NAVBAR -->
+<nav class="navbar" style="background-color: #000000;">
+    <a class="navbar-brand text-white" href="{% url 'home' %}">
+        <img src="{% static 'assets/logo1.svg' %}" width="30" height="30" class="d-inline-block align-top" alt="" />
+        CodeShare
+    </a>
+</nav>
+
+<body>
+
+</body>
+
+</html>
