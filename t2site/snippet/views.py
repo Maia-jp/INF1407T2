@@ -43,7 +43,6 @@ def new(request):
         return redirect("login")
 
 
-
 def snippetTemplate(request, id):
     id = uuid.UUID(id)
     obj = Snippet.objects.get(id=id)
@@ -58,3 +57,44 @@ def snippetTemplate(request, id):
 
     template = loader.get_template('snippet.html')
     return HttpResponse(template.render(context,request))
+
+
+def snippetEdit(request,id):
+    id = uuid.UUID(id)
+    codeSnippet = Snippet.objects.get(id=id)
+
+    if request.user.is_authenticated:
+        if request.user.username != codeSnippet.author.username:
+            return HttpResponse("Sem permissao para alterar esse snippet")
+
+        if request.method == "POST":
+            return snippetEditPost(request)
+        else:
+            respose = snippetEditLoadPage(request,id,codeSnippet)
+            return respose
+    else:    
+        return redirect("login")
+
+
+
+def snippetEditLoadPage(request,id,codeSnippet):
+    context = {
+        "id" : id,
+        "code" : codeSnippet.code,
+        "author" : codeSnippet.author.username,
+        "title" : codeSnippet.title,
+        "date" : codeSnippet.updated_at.strftime("%m/%d/%Y, %H:%M:%S"),
+        "lang": codeSnippet.lang_id
+    }
+
+    template = loader.get_template('edit.html')
+    return HttpResponse(template.render(context,request))
+
+def snippetEditPost(request):
+    id_inPost = request.POST['id']
+    code = request.POST['snippet']
+    
+    id = uuid.UUID(id_inPost)
+    Snippet.objects.filter(id = id).update(code = code)
+    
+    return HttpResponse(id_inPost)

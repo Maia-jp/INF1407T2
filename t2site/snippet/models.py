@@ -5,7 +5,7 @@ from django.contrib.auth.models import User
 # Create your models here.
 class ProgLang(models.Model):
     name = models.CharField(primary_key=True, max_length=24)
-    # helloWorld = models.CharField(max_length=1024)
+    helloWorld = models.CharField(max_length=1024)
 
 class Snippet(models.Model):
     #Meta

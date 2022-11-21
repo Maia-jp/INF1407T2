@@ -39,16 +39,18 @@
         <div class="window-header"> 
           <div class="action-buttons"></div>
           <div class="controls">
-            {{ title }} - created at {{ date }} by {{ author }}
+            {{ title }} - ultima alteração em {{ date }} by {{ author }}
           </div>
         </div>
           <pre><code class="editor">{{ code }}</code></pre>
       </div>
       {% if edit %}
-      <button id="btnEditar" class="btn" type="submit">Editar</button>
+      <button id="btnEditar" class="btn" type="submit" onclick="goToEdit()" >Editar</button>
       {% endif %}
       
     </main>
   </body>
+  <!-- Custom JS -->
+<script src="{% static 'js/snippet.js' %}"></script>
   <script>hljs.highlightAll();</script>
 </html>

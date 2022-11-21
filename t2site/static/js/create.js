@@ -19,10 +19,17 @@ const highlight = (editor) => {
   hljs.highlightBlock(editor);
 };
 
+const helloWorld = {
+  "Python": 'print("Hello World!")',
+  "Lua": 'print "Hello World!" ',
+  "Go": 'import "fmt”\nfunc main() { fmt.Println("Hello world!") })',
+  "Javascript": 'document.write("Hello world!");'
+}
+
 const editor = document.querySelector(".editor");
 const jar = new CodeJar(editor, highlight);
-// editor.className = "editor language-c"
-jar.updateCode("hello world")
+editor.className = "editor language-Python"
+jar.updateCode(helloWorld["Python"])
 
 // Language change
 
@@ -30,7 +37,10 @@ jar.updateCode("hello world")
 function changeLang(){
   var langDoc = document.getElementById("codeLang");
   var lang = langDoc.value
-  editor.className = "editor language ${lang}"
+  console.log("editor language ${lang}")
+  editor.className = "editor language " + lang
+
+  jar.updateCode(helloWorld[lang])
 }
 
 

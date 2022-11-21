@@ -52,11 +52,12 @@ from django.http import QueryDict
 def userAuthPage(request):
     #Any request
     userModel = User.objects.get(username=request.user.username)
-    snippetsObj = Snippet.objects.filter(author=userModel).values_list('id','title','updated_at') 
+    snippetsObj = Snippet.objects.filter(author=userModel).values_list('id','title','updated_at','lang') 
     userCodeIds = []
     print(snippetsObj)
-    for id,title,dt in snippetsObj:
-        userCodeIds.append([str(id),title,dt.strftime("%m/%d/%Y, %H:%M:%S")])
+    for id,title,dt,lang in snippetsObj:
+        print(lang)
+        userCodeIds.append([str(id),title,dt.strftime("%m/%d/%Y, %H:%M:%S"),lang])
     context = {
         'codeIDs': userCodeIds
     }

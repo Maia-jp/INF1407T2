@@ -5,7 +5,7 @@
   <meta charset="UTF-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Novo Snippet</title>
+  <title>Edditing {{ title }}</title>
   {% load static %}
   <!-- JQuery -->
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
@@ -34,25 +34,20 @@
       <div class="window-header">
         <div class="action-buttons"></div>
         <div class="controls">
-          <input id="codeTitle" type="text" placeholder="NovoCodigo">
-          
-          <select id="codeLang" onchange="changeLang()">
-            {% for x in progLang %}
-            <option value="{{ x.name }}">{{ x.name }}</option>
-            {% endfor %}
-          </select>
+          {{ title }} - ultima alteração em {{ date }} by {{ author }}
         </div>
       </div>
       <div class="window-body">
-        <div class="editor language-Python" data-gramm="false"></div>
+        <div class="editor language-{{ lang }}" data-gramm="false">
+        {{code}}
+        </div>
       </div>
     </div>
 
-    <button id="btnSalvar" class="btn btn-success" type="submit" onclick="saveSnippet()">Salvar</button>
+    <button id="btnSalvar" class="btn btn-success" type="submit" onclick="saveSnippet('{{ id }}')">Salvar</button>
   </main>
 </body>
 <!-- Custom JS -->
 <script src="{% static 'codeJar/codejar.js' %}"></script>
-<script src="{% static 'js/create.js' %}"></script>
-
+<script src="{% static 'js/edit.js' %}"></script>
 </html>
