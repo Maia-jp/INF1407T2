@@ -4,12 +4,12 @@
 const highlight = (editor) => {
     // highlight.js does not trims old tags,
     // let's do it by this hack.
-    editor.textContent = editor.textContent.trim();
     hljs.highlightBlock(editor);
 };
 
 const editor = document.querySelector(".editor");
 const jar = new CodeJar(editor, highlight);
+editor.textContent = editor.textContent.trim();
 
 
 

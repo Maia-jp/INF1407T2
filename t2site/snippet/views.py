@@ -54,7 +54,8 @@ def snippetTemplate(request, id):
         "author": obj.author.username,
         "title": obj.title,
         "date": obj.updated_at.strftime("%m/%d/%Y, %H:%M:%S"),
-        "edit": request.user.username == obj.author.username
+        "edit": request.user.username == obj.author.username,
+        "lang": obj.lang_id
     }
 
     template = loader.get_template('snippet.html')

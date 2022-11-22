@@ -32,7 +32,7 @@
           {{ title }} - ultima alteração em {{ date }} by {{ author }}
         </div>
       </div>
-      <pre><code class="editor">{{ code }}</code></pre>
+      <pre><code class="editor language-{{ lang }}">{{ code }}</code></pre>
     </div>
     {% if edit %}
     <button id="btnEditar" class="btn" type="submit" onclick="goToEdit()">Editar</button>
